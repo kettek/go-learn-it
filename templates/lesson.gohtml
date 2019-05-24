@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{{.Lesson.Title}} - {{.CurriculumName}}</title>
+        <link rel="stylesheet" href="/static/lesson.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.46.0/codemirror.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.46.0/codemirror.min.js"></script>
+        <script src="https://unpkg.com/split-grid/dist/split-grid.js"></script>
+        <script src="/static/learn-it.js"></script>
+    </head>
+    <body>
+        <section id="Menu">
+            <section id="Title">
+                {{.CurriculumName}}
+            </section>
+            <section id="Info">
+                <a class="menu button" id="ReportBug" href="//github.com/kettek/go-learn-it/issues/new" title="Report a Bug">🐞</a>
+                <a class="menu button" id="TableOfContents" href="/list">☰</a>
+                <section id="TableOfContents"></section>
+            </section>
+        </section>
+        <section id="Body">
+            <section id="LessonView">
+                <section id="Content">
+                    <section id="ContentWrapper">
+                        {{.Lesson.HTMLContent}}
+                    </section>
+                </section>
+                <section id="Navigation">
+                    <a id="PreviousLesson" href="{{dec .LessonIndex}}">
+                    &lt;
+                    </a>
+                    {{.LessonIndex}}/{{.LessonsCount}}
+                    <a id="NextLesson" href="{{inc .LessonIndex}}">&gt;</a> 
+                    </a>
+                </section>
+            </section>
+            <section id="EditorView">
+                <section id="Code">
+                    <textarea id="Editor" language-{{.Lesson.Language}}">{{.Lesson.SourceCode}}</textarea>
+                </section>
+                <section id="Output">
+                    <section id="Controls">
+                    </section>
+                    <pre id="OutputPre"></pre>
+                </section>
+                <div id="EditorHandle"></div>
+            </section>
+            <div id="BodyHandle"></div>
+            <script>
+                Split({
+                    columnGutters: [
+                        {
+                            track: 1,
+                            element: document.getElementById("BodyHandle"),
+                        },
+                    ],
+                    rowGutters: [
+                        {
+                            track: 1,
+                            element: document.getElementById("EditorHandle"),
+                        },
+                    ]
+                })
+            </script>
+        </section>
+    </body>
+</html>

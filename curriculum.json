@@ -1,0 +1,9 @@
+{
+    "Name": "A Tour of a Language",
+    "Description": "A nice description of this tour.",
+    "Language": "lang",
+    "LanguageExtension": "ext",
+    "Courses": [
+        "basics"
+    ]
+}

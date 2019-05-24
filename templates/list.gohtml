@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{{.Title}} - Learn It</title>
+    </head>
+    <body>
+        <section id="Menu">
+            <section id="Title">
+                Learn It
+            </section>
+            <button id="ReportBug">Report a Bug</button>
+            <section id="TableOfContents"></section>
+        </section>
+        <section id="Container">
+            <h1>Welcome to the curriculum</h1>
+            <p>{{.Description}}</p>
+
+            {{range $course := .Courses}}
+                <section class="Course">
+                    <header>{{$course.Name}}</header>
+                    <p class="Content">{{$course.Description}}</p>
+                    {{range $i, $lesson := .Lessons}}
+                        <a href="/{{$course.Shortname}}/{{inc $i}}">{{$lesson.Title}}</a>
+                    {{end}}
+                </section>
+            {{end}}
+        </section>
+    </body>
+</html>

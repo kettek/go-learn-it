@@ -1,0 +1,230 @@
+:root {
+    --body-background: #f0f0e0;
+    --body-color: #0f0f1f;
+    --lesson-background: #ffffff;
+    --lesson-color: #000;
+    --editor-background: #0f0f0f;
+    --editor-color: #6d6;
+    --output-color: #f0f0f0;
+    --error-color: #ff3333;
+    --result-color: #f0f0f0;
+
+    --link-color: #c02060;
+    --link-background: #f0f0e0;
+    --link-hover-color: #f05090;
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 12pt;
+    background: var(--body-background);
+    color: var(--body-color);
+
+    display: grid;
+    grid-template-rows: 3em 1fr;
+}
+
+#Menu {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
+    min-width: 0;
+    min-height: 0;
+    padding: .5em;
+    background: var(--body-background);
+    color: var(--body-color);
+}
+#Menu > * {
+    display: inline-block;
+}
+#Menu img {
+    height: 100%;
+}
+#Menu > #Title {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 0;
+    font-size: 150%;
+    padding: 0 .5em;
+}
+#Menu > #Info {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 1em;
+}
+
+.button {
+    font-size: 1em;
+    text-decoration: none;
+    margin: .1em;
+    padding: .1em;
+}
+.button:visited, .button {
+    color: var(--link-color);
+    border: 1px solid var(--link-color);
+    padding: .25em;
+    cursor: pointer;
+}
+.button:hover {
+    color: var(--link-hover-color);
+}
+.menu.button {
+    font-size: 1.5em;
+    border: 0;
+}
+.button#ClearButton {
+    background: var(--link-background);
+}
+.button#RunButton {
+    background: var(--link-color);
+    color: var(--link-background);
+}
+.button#RunButton:hover {
+    color: var(--link-color);
+    background: var(--link-background);
+}
+
+#Body {
+    display: grid;
+    grid-template-columns: 1fr 4px 1fr;
+    grid-template-rows: 1fr;
+    min-width: 0;
+    min-height: 0;
+    font-size: 100%;
+}
+
+@media screen and (max-device-aspect-ratio: 1/1) and (orientation: portrait) {
+  body {
+    font-size: 1.75vw;
+  }
+  #Body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .button {
+    font-size: 200%;
+  }
+}
+
+#LessonView {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: [content] auto [navigation] 2em;
+    min-height: 0;
+    min-width: 0;
+    background: var(--lesson-background);
+    color: var(--lesson-color);
+    border-radius: 3px;
+}
+#LessonView > #Content {
+    overflow: auto;
+    padding: 1em;
+}
+#LessonView > #Content h1 {
+    font-size: 150%;
+    margin: .5em 0;
+}
+#LessonView > #Navigation {
+    grid-row: navigation;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+    background: var(--body-background);
+    overflow: hidden;
+}
+#LessonView > #Navigation > a {
+    padding: 0 .5em;
+    text-decoration: none;
+}
+#EditorView {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4px .5fr;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#EditorView > #Code {
+    min-height: 0;
+    min-width: 0;
+    font-size: 100%;
+    background: var(--editor-background);
+    color: var(--editor-color);
+}
+body #EditorView > #Code > * {
+    height: 100%;
+}
+body #EditorView > #Output {
+    grid-column-end: 2;
+    min-height: 0;
+    min-width: 0;
+    background: var(--output-background);
+    background-repeat: no-repeat;
+    background-size: var(--output-background-size);
+    background-position: var(--output-background-position);
+    color: var(--link-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+body #EditorView > #Output > #Controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.5;
+}
+body #EditorView > #Output > #Controls:hover {
+    opacity: 1;
+}
+body #EditorView > #Output > #OutputPre {
+    background: var(--editor-background);
+    color: var(--editor-color);
+    overflow:auto;
+    margin:0;
+    white-space: pre-wrap;
+}
+.error {
+    color: var(--error-color);
+}
+.result {
+    color: var(--result-color);
+}
+
+#BodyHandle {
+    grid-area: 1 / 2 / 4 / 2;
+    background: var(--body-background);
+    cursor: grab;
+}
+
+#EditorHandle {
+    grid-area: 2 / 1 / 2 / 4;
+    background: var(--body-background);
+    cursor: grab;
+}
+
+.Icon {
+  width: 2em;
+  height: 2em;
+}
+.mirror {
+  transform: scaleX(-1.0);
+}

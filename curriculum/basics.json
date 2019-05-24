@@ -1,0 +1,9 @@
+{
+  "Name": "Basics",
+  "Description": "A description of this course",
+  "Language": "lang",
+  "LanguageExtension": "ext",
+  "Lessons": [
+    "Lesson 1"
+  ]
+}
