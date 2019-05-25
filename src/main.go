@@ -23,6 +23,8 @@ func main() {
 	}
 	sharePath := path.Join(filepath.Dir(filepath.Dir(binaryPath)), "share", "go-learn-it")
 
+	addressPtr := flag.String("address", "", "HTTP listen address")
+	portPtr := flag.Int("port", 8888, "HTTP listen port")
 	sharepathPtr := flag.String("sharepath", sharePath, "Path to the built-in go-learn-it static and template data")
 	datapathPtr := flag.String("datapath", "", "Path to external go-learn-it static and template data")
 	curriculumPtr := flag.String("curriculum", "curriculum.json", "Path to the curriculum data file located in either basepath or datapath")
@@ -54,7 +56,9 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(fs)))
 	http.HandleFunc("/api/", courseMaster.handleAPI)
 	http.HandleFunc("/", courseMaster.handleHTTP)
-	http.ListenAndServe(":8888", nil)
+
+	http.ListenAndServe(fmt.Sprintf("%s:%d", *addressPtr, *portPtr), nil)
+	fmt.Printf("Now listening on %s:%d\n", *addressPtr, *portPtr)
 }
 
 type multipathFileSystem struct {
