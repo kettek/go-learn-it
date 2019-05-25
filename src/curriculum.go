@@ -1,10 +1,10 @@
 package main
 
 import (
-	"io/ioutil"
 	"encoding/json"
 	"path"
 	"fmt"
+	"github.com/kettek/go-multipath"
 )
 
 // Curriculum is the containing type for a set of courses.
@@ -29,10 +29,10 @@ func (c *Curriculum) GetCourseByShortname(coursePath string) (index int, course 
 	return
 }
 
-// CurriculumFromFilePath attempts to unmarshal the json from the given file path into the curriculum.
-func CurriculumFromFilePath(filePath string) (c Curriculum, err error) {
+// CurriculumFromMultiPath attempts to unmarshal the json from the given file path into the curriculum.
+func CurriculumFromMultiPath(multiPath multipath.Multipath, filePath string) (c Curriculum, err error) {
 	var bytes []byte
-	if bytes, err = ioutil.ReadFile(filePath); err != nil {
+	if bytes, err = multiPath.ReadFile(filePath); err != nil {
 		return
 	}
 	if err = json.Unmarshal(bytes, &c); err != nil {
@@ -41,7 +41,7 @@ func CurriculumFromFilePath(filePath string) (c Curriculum, err error) {
 	// Construct our Lesson Files.
 	for _, courseDirname := range c.CourseDirs {
 		var course Course
-		if course, err = CourseFromDirPath(path.Join("curriculum", courseDirname)); err != nil {
+		if course, err = CourseFromDirMultiPath(multiPath, path.Join("curriculum", courseDirname)); err != nil {
 			fmt.Print(err)
 			continue
 		}

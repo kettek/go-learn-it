@@ -3,16 +3,17 @@ package main
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"path"
 	"strconv"
 	"strings"
 	"text/template"
+	"github.com/kettek/go-multipath"
 )
 
 // CourseMaster handles all requests to "/" and delineates accordingly.
 type CourseMaster struct {
+	multiPath      multipath.Multipath
 	Curriculum     Curriculum
 	LessonTemplate *template.Template
 	ListTemplate   *template.Template
@@ -46,14 +47,14 @@ func (h *CourseMaster) buildTemplates() (err error) {
 		},
 	}
 
-	if bytes, err = ioutil.ReadFile(path.Join("templates", "lesson.gohtml")); err != nil {
+	if bytes, err = h.multiPath.ReadFile(path.Join("templates", "lesson.gohtml")); err != nil {
 		return
 	}
 	if h.LessonTemplate, err = template.New("lesson").Funcs(funcMap).Parse(string(bytes)); err != nil {
 		return
 	}
 
-	if bytes, err = ioutil.ReadFile(path.Join("templates", "list.gohtml")); err != nil {
+	if bytes, err = h.multiPath.ReadFile(path.Join("templates", "list.gohtml")); err != nil {
 		return
 	}
 	if h.ListTemplate, err = template.New("list").Funcs(funcMap).Parse(string(bytes)); err != nil {

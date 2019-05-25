@@ -1,3 +1,7 @@
 github.com/gomarkdown/markdown v0.0.0-20190222000725-ee6a7931a1e4 h1:vELsocEzlhM4lk2nhxolEaQrMp25u7/i9IX8s9uLads=
 github.com/gomarkdown/markdown v0.0.0-20190222000725-ee6a7931a1e4/go.mod h1:gmFANS06wAVmF0B9yi65QKsRmPQ97tze7FRLswua+OY=
+github.com/kettek/go-multipath v0.0.0-20190524174618-f995acab51bd h1:NdkPFpTaYkEGDoFTcWmSTNDfGD9Q5kguUYaAUdHQsqM=
+github.com/kettek/go-multipath v0.0.0-20190524174618-f995acab51bd/go.mod h1:3hn4/mTJOs5hiphBQWAS1gvn/r57VpK01ZiRY0HgfoY=
+github.com/kettek/go-multipath v0.0.0-20190525005947-eb6c6aeea208 h1:UUMPsHCYwxvNSMUfsYCtKyF10AyBXEKE4MGPnKNKRJs=
+github.com/kettek/go-multipath v0.0.0-20190525005947-eb6c6aeea208/go.mod h1:3hn4/mTJOs5hiphBQWAS1gvn/r57VpK01ZiRY0HgfoY=
 github.com/russross/blackfriday v2.0.0+incompatible h1:cBXrhZNUf9C+La9/YpS+UHpUT8YD6Td9ZMSU9APFcsk=
