@@ -3,12 +3,12 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/kettek/go-multipath"
 	"net/http"
 	"path"
 	"strconv"
 	"strings"
 	"text/template"
-	"github.com/kettek/go-multipath"
 )
 
 // CourseMaster handles all requests to "/" and delineates accordingly.
@@ -30,6 +30,7 @@ type ListTemplateData struct {
 // LessonTemplateData is the structure we pass to the lesson template.
 type LessonTemplateData struct {
 	CurriculumName string
+	CourseName     string
 	LessonIndex    int
 	LessonsCount   int
 	Lesson         *Lesson
@@ -91,7 +92,7 @@ func (h *CourseMaster) handleHTTP(w http.ResponseWriter, r *http.Request) {
 	case "list":
 		if err = h.ListTemplate.Execute(w, ListTemplateData{
 			Title:       "List of Courses",
-			Name:		h.Curriculum.Name,
+			Name:        h.Curriculum.Name,
 			Description: h.Curriculum.Description,
 			Courses:     h.Curriculum.Courses,
 		}); err != nil {
@@ -133,6 +134,7 @@ func (h *CourseMaster) handleHTTP(w http.ResponseWriter, r *http.Request) {
 			// If we got to here that means we have a lesson ready.
 			t := LessonTemplateData{
 				CurriculumName: h.Curriculum.Name,
+				CourseName:     course.Name,
 				LessonIndex:    lessonIndex,
 				LessonsCount:   len(course.Lessons),
 				Lesson:         &course.Lessons[lessonIndex-1],

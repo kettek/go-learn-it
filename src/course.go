@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"github.com/gomarkdown/markdown"
+	"github.com/kettek/go-multipath"
 	"log"
 	"path"
 	"strconv"
-	"github.com/kettek/go-multipath"
 )
 
 // Course is our type for holding a collection of Lessons.
@@ -45,7 +45,6 @@ func CourseFromDirMultiPath(multiPath multipath.Multipath, dirPath string) (c Co
 		}
 		if sourceCode, err = multiPath.ReadFile(sourcePath); err != nil {
 			log.Printf("Could not read source file for lesson(%d): %s\n", i+1, lessonTitle)
-			continue
 		}
 
 		c.Lessons = append(c.Lessons, Lesson{

@@ -2,19 +2,18 @@ package main
 
 import (
 	"encoding/json"
-	"path"
 	"fmt"
 	"github.com/kettek/go-multipath"
+	"path"
 )
 
 // Curriculum is the containing type for a set of courses.
 type Curriculum struct {
-	Name			string
-	Description		string
-	CourseDirs		[]string `json:"Courses"`
-    Courses 		[]Course
+	Name        string
+	Description string
+	CourseDirs  []string `json:"Courses"`
+	Courses     []Course
 }
-
 
 // GetCourseByShortname returns a pointer to a course if it exists.
 func (c *Curriculum) GetCourseByShortname(coursePath string) (index int, course *Course) {
@@ -43,7 +42,6 @@ func CurriculumFromMultiPath(multiPath multipath.Multipath, filePath string) (c 
 		var course Course
 		if course, err = CourseFromDirMultiPath(multiPath, path.Join("curriculum", courseDirname)); err != nil {
 			fmt.Print(err)
-			continue
 		}
 		c.Courses = append(c.Courses, course)
 	}
